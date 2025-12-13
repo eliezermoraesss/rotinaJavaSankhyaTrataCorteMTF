@@ -71,8 +71,8 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
 
                     cstm.execute();
 
-                    qtdNaoAtendida = new BigDecimal(cstm.getDouble("P_QTDNAOATEND"));
-                    qtdAtendida = new BigDecimal(cstm.getDouble("P_QTDATEND"));
+                    qtdNaoAtendida = cstm.getBigDecimal("P_QTDNAOATEND");
+                    qtdAtendida = cstm.getBigDecimal("P_QTDATEND");
                 } finally {
                     JdbcUtils.closeStatement(cstm);
                     jdbc.closeSession();
