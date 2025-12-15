@@ -108,16 +108,15 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
                     itemVO.setProperty("PENDENTE", "N");
                 }
 
-                //JapeWrapper pedidoDAO = JapeFactory.dao("ItemNota");
-                //DynamicVO itemPedidoVO = pedidoDAO.findByPK(new Object[]{ itemVO.asBigDecimal("AD_NUNOTAPED"), itemVO.asBigDecimal("AD_SEQUENCIAPED") });
+                JapeWrapper pedidoDAO = JapeFactory.dao("ItemNota");
+                DynamicVO itemPedidoVO = pedidoDAO.findByPK(new Object[]{ itemVO.asBigDecimal("AD_NUNOTAPED"), itemVO.asBigDecimal("AD_SEQUENCIAPED") });
 
                 BigDecimal vlrUnit = itemVO.asBigDecimal("VLRUNIT"); // 58,04
                 BigDecimal qtdNeg = itemVO.asBigDecimal("QTDNEG"); // 25
-                //BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC"); // 17
+                BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC"); // 17
 
                 BigDecimal vlrTot = vlrUnit.multiply(qtdNeg).setScale(2, RoundingMode.HALF_UP);
-                //BigDecimal vlrDesc = vlrTot.multiply(percDesc).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP); // 246,67
-                BigDecimal vlrDesc = itemVO.asBigDecimal("VLRDESC");
+                BigDecimal vlrDesc = vlrTot.multiply(percDesc).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP); // 246,67
 
                 itemVO.setProperty("VLRDESC", vlrDesc);
                 itemVO.setProperty("VLRTOT", vlrTot);
