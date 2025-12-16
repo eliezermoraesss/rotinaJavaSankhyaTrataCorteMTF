@@ -111,12 +111,12 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
                 JapeWrapper pedidoDAO = JapeFactory.dao("ItemNota");
                 DynamicVO itemPedidoVO = pedidoDAO.findByPK(new Object[]{ itemVO.asBigDecimal("AD_NUNOTAPED"), itemVO.asBigDecimal("AD_SEQUENCIAPED") });
 
-                BigDecimal vlrUnit = itemVO.asBigDecimal("VLRUNIT"); // 58,04
-                BigDecimal qtdNeg = itemVO.asBigDecimal("QTDNEG"); // 25
-                BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC"); // 17
+                BigDecimal vlrUnit = itemVO.asBigDecimal("VLRUNIT");
+                BigDecimal qtdNeg = itemVO.asBigDecimal("QTDNEG");
+                BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC");
 
                 BigDecimal vlrTot = vlrUnit.multiply(qtdNeg).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal vlrDesc = vlrTot.multiply(percDesc).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP); // 246,67
+                BigDecimal vlrDesc = vlrTot.multiply(percDesc).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP);
 
                 itemVO.setProperty("VLRDESC", vlrDesc);
                 itemVO.setProperty("VLRTOT", vlrTot);
@@ -133,7 +133,7 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
 
             for (StackTraceElement erro : trace) {
                 msg.append("\nFile:" + erro.getFileName() + " Class:" + erro.getClassName() + " Method:" + erro.getMethodName() + " Line:" + erro.getLineNumber());
-                if (erro.getClassName().contains("snkcampinas")) {
+                if (erro.getClassName().contains("multfer")) {
                     break;
                 }
             }

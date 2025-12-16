@@ -101,7 +101,7 @@ public class CabecalhoListenerMultfer implements EventoProgramavelJava {
                     + " Method:" + erro.getMethodName()
                     + " Line:" + erro.getLineNumber());
 
-            if (erro.getClassName().contains("snkcampinas"))
+            if (erro.getClassName().contains("multfer"))
                 break;
         }
 
