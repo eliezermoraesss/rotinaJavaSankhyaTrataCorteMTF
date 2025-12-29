@@ -116,7 +116,9 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
                 BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC");
 
                 BigDecimal vlrTot = vlrUnit.multiply(qtdNeg).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal vlrDesc = vlrTot.multiply(percDesc).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP);
+                BigDecimal vlrDesc = vlrTot.multiply(percDesc)
+                		.divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP)
+                		.setScale(2, RoundingMode.HALF_UP);
 
                 itemVO.setProperty("VLRDESC", vlrDesc);
                 itemVO.setProperty("VLRTOT", vlrTot);
