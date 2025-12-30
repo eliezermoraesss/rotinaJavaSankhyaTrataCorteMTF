@@ -111,15 +111,21 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
                 JapeWrapper pedidoDAO = JapeFactory.dao("ItemNota");
                 DynamicVO itemPedidoVO = pedidoDAO.findByPK(new Object[]{ itemVO.asBigDecimal("AD_NUNOTAPED"), itemVO.asBigDecimal("AD_SEQUENCIAPED") });
 
-                BigDecimal vlrUnit = itemVO.asBigDecimal("VLRUNIT");
+                BigDecimal vlrUnit = itemVO.asBigDecimal("VLRUNIT").setScale(2, RoundingMode.HALF_UP);
                 BigDecimal qtdNeg = itemVO.asBigDecimal("QTDNEG");
                 BigDecimal percDesc = itemPedidoVO.asBigDecimal("PERCDESC");
+                
+                BigDecimal vlrTot = vlrUnit
+                        .multiply(qtdNeg)
+                        .setScale(2, RoundingMode.HALF_UP);
+                
+                BigDecimal fatorDesc = percDesc
+                        .divide(new BigDecimal("100"), 6).setScale(2, RoundingMode.HALF_UP);
 
-                BigDecimal vlrTot = vlrUnit.multiply(qtdNeg).setScale(2, RoundingMode.HALF_UP);
-                BigDecimal vlrDesc = vlrTot.multiply(percDesc)
-                		.divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP)
-                		.setScale(2, RoundingMode.HALF_UP);
-
+                BigDecimal vlrDesc = vlrTot
+                        .multiply(fatorDesc)
+                        .setScale(2, RoundingMode.HALF_UP);
+                
                 itemVO.setProperty("VLRDESC", vlrDesc);
                 itemVO.setProperty("VLRTOT", vlrTot);
 
