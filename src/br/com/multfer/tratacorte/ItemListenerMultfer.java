@@ -120,7 +120,7 @@ public class ItemListenerMultfer implements EventoProgramavelJava {
                         .setScale(2, RoundingMode.HALF_UP);
                 
                 BigDecimal fatorDesc = percDesc
-                        .divide(new BigDecimal("100"), 6).setScale(2, RoundingMode.HALF_UP);
+                        .divide(new BigDecimal("100"), 6, RoundingMode.HALF_UP);
 
                 BigDecimal vlrDesc = vlrTot
                         .multiply(fatorDesc)
